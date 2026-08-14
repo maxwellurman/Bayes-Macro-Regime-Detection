@@ -53,7 +53,56 @@ Note: We include both the annual change and monthly change series for Industrial
 <img width="9538" height="7080" alt="time_series_plots" src="https://github.com/user-attachments/assets/832e7c75-1e63-4cee-9c63-6e1a7e4eac4b" />
 
 ## Methodology No. 1: Discrete Emissions
-What model/algorithm are you using?
+### Hidden Markov Model with Baum-Welch Algorithm
+Hidden Markov Model with K hidden states representing macroeconomic regimes:
+
+$$S_t \in \{1, \ldots, K\}$$
+
+Each observed variable X_i is discretized into one of three categories:
+
+$$X_{i,t} \in \{\text{Low}, \text{Middle}, \text{High}\}$$
+
+Hidden Markov Model requires:
+
+An Initial State Distribution...
+
+The initial state distribution is
+
+$$\boldsymbol{\pi}=\begin{bmatrix}
+P(S_0 = 1) \\
+P(S_0 = 2) \\
+\vdots \\
+P(S_0 = K)
+\end{bmatrix}$$
+
+A Transition Matrix...
+
+$$\mathbf{A}=\begin{bmatrix}
+P(S_t=0 \mid S_{t-1}=0) & \cdots & P(S_t=K \mid S_{t-1}=0) \\
+P(S_t=0 \mid S_{t-1}=1) & \cdots & P(S_t=K \mid S_{t-1}=1) \\
+\vdots & \ddots & \vdots \\
+P(S_t=0 \mid S_{t-1}=K) & \cdots & P(S_t=K \mid S_{t-1}=K)
+\end{bmatrix}$$
+
+Emission Matrices for every variable...
+
+For observed variable $X_i$, the emission matrix is
+
+$$\mathbf{B}_i=\begin{bmatrix}
+P(X_{i,t}=\text{Low} \mid S_t=0) &
+P(X_{i,t}=\text{Middle} \mid S_t=0) &
+P(X_{i,t}=\text{High} \mid S_t=0) \\
+P(X_{i,t}=\text{Low} \mid S_t=1) &
+P(X_{i,t}=\text{Middle} \mid S_t=1) &
+P(X_{i,t}=\text{High} \mid S_t=1) \\
+\vdots & \vdots & \vdots \\
+P(X_{i,t}=\text{Low} \mid S_t=K) &
+P(X_{i,t}=\text{Middle} \mid S_t=K) &
+P(X_{i,t}=\text{High} \mid S_t=K)
+\end{bmatrix}$$
+
+
+The Baum-Welch algorithm is an expectation maximization algorithm used to train HMM's by iteratively updating the transition and emission matrices and initial state distribution to maximize the likelihood of a set of observed sequences when hidden states are unobserved.
 
 ## Results for Methodology No. 1: Discrete Emissions
 What did you find?
@@ -75,3 +124,21 @@ What packages are required?
 
 ## Running the Analysis
 What should someone run and in what order?
+
+Subscript:          x_i
+Superscript:        x^2
+Greek:              \alpha \beta \mu \sigma \Sigma
+Fraction:           \frac{a}{b}
+Square root:        \sqrt{x}
+Sum:                \sum_{i=1}^{n}
+Product:            \prod_{i=1}^{n}
+Integral:           \int_a^b
+Probability:        P(X \mid Y)
+Expectation:        \mathbb{E}[X]
+Vector:             \mathbf{x}
+Transpose:          x^\top
+Inverse:            \Sigma^{-1}
+Approximately:      \approx
+Less/equal:         \leq
+Greater/equal:      \geq
+Infinity:           \infty
