@@ -184,8 +184,20 @@ Pulling the emission category with the maximum probability for each given state,
 **Most Likely State Plotted Against Real GDP**
 The red bars are recessionary months according to NBER.  The NBER does not use a formulaic methodology for establishing a recession, but instead looks at a variety of variables.  However, recessions tend to correspond to multiple quarters of declines in seasonally adjusted real GDP.
 
-Below, you can see that State_1 strongly corresponds to recessions.  During the provided time period, in 1990, 2001, 2008, and 2020, when the latent state changes to State_1, the economy enters into a decline in real GDP and a recession one or two months after the state transition. Notably, the state transitioned to State_1 in November 2025, yet we are not in a recession.   
+Below, you can see that State_1 strongly corresponds to recessions.  During the provided time period, in 1990, 2001, 2008, and 2020, when the latent state changes to State_1, the economy enters into a decline in real GDP and a recession one or two months after the state transition. Notably, the state transitioned to State_1 in November 2025, yet we are not in a recession.
+
+You can also see that State_0 follows State_1, indicating a recovery period after a downturn.
+
 <img width="7997" height="3271" alt="r_GDP_and_states" src="https://github.com/user-attachments/assets/2607268b-ef7c-43e3-88e6-e25c15df0c41" />
+
+This is the same plot but with the maximum state probability plotted when it is less than 99%.  You can see that around regime changes there is more ambiguity between states.
+<img width="12647" height="3271" alt="r_GDP_and_states_w _max_prob" src="https://github.com/user-attachments/assets/692a0afe-64b8-470b-962e-d16a4aceaada" />
+
+
+### Visualizing / Interpreting 5 Latent States:
+**Most Likely State Plotted Against Real GDP**
+[[______]]
+
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
