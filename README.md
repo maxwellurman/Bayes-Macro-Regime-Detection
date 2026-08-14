@@ -145,7 +145,14 @@ Another factor is interpretability.  We use 4 states as a starting point.
 
 ### Visualizing / Interpreting 4 Latent States:
 
-
+**Learned Transition Matrix:**
+|   State_0 |   State_1 |   State_2 |   State_3 |
+|----------:|----------:|----------:|----------:|
+|   0.9478  |   0       |   0.03455 |   0.01765 |
+|   0.04572 |   0.95428 |   0       |   0       |
+|   0       |   0.02736 |   0.95103 |   0.02161 |
+|   0.02793 |   0       |   0.04299 |   0.92908 |
+- This means that the economy rarely changes states month to month.  This aligns with expectations-- the economy doesn't bounce between expansionary and recessionary cycles often.
 
 
 ## Methodology No. 2: Continuous Emissions
