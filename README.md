@@ -53,7 +53,7 @@ Note: We include both the annual change and monthly change series for Industrial
 <img width="9538" height="7080" alt="time_series_plots" src="https://github.com/user-attachments/assets/832e7c75-1e63-4cee-9c63-6e1a7e4eac4b" />
 
 ## Methodology No. 1: Discrete Emissions
-### Hidden Markov Model with Baum-Welch Algorithm
+### Hidden Markov Model Set Up
 Hidden Markov Model with K hidden states representing macroeconomic regimes:
 
 $$S_t \in \{1, \ldots, K\}$$
@@ -64,9 +64,7 @@ $$X_{i,t} \in \{\text{Low}, \text{Middle}, \text{High}\}$$
 
 Hidden Markov Model requires:
 
-An Initial State Distribution...
-
-The initial state distribution is
+- An Initial State Distribution...
 
 $$\boldsymbol{\pi}=\begin{bmatrix}
 P(S_0 = 1) \\
@@ -75,7 +73,7 @@ P(S_0 = 2) \\
 P(S_0 = K)
 \end{bmatrix}$$
 
-A Transition Matrix...
+- A Transition Matrix...
 
 $$\mathbf{A}=\begin{bmatrix}
 P(S_t=0 \mid S_{t-1}=0) & \cdots & P(S_t=K \mid S_{t-1}=0) \\
@@ -84,9 +82,7 @@ P(S_t=0 \mid S_{t-1}=1) & \cdots & P(S_t=K \mid S_{t-1}=1) \\
 P(S_t=0 \mid S_{t-1}=K) & \cdots & P(S_t=K \mid S_{t-1}=K)
 \end{bmatrix}$$
 
-Emission Matrices for every variable...
-
-For observed variable $X_i$, the emission matrix is
+- Emission Matrices for every variable...
 
 $$\mathbf{B}_i=\begin{bmatrix}
 P(X_{i,t}=\text{Low} \mid S_t=0) &
@@ -101,11 +97,27 @@ P(X_{i,t}=\text{Middle} \mid S_t=K) &
 P(X_{i,t}=\text{High} \mid S_t=K)
 \end{bmatrix}$$
 
+### The Baum-Welch Algorithm
+- The Baum-Welch algorithm is an expectation maximization algorithm used to train HMM's by iteratively updating the transition and emission matrices and initial state distribution to maximize the likelihood of a set of observed sequences when hidden states are unobserved.
 
-The Baum-Welch algorithm is an expectation maximization algorithm used to train HMM's by iteratively updating the transition and emission matrices and initial state distribution to maximize the likelihood of a set of observed sequences when hidden states are unobserved.
+- Therefore, rather than set a fixed initial state distribution, transition matrix, and emission matrices, the model learns these from the data.
+  
+- The number of hidden states is set, not learned by the algorithm.
+
+- The algorithm has several steps. Without getting into all the details, we instead highlight what is being maximized:
+
+The Baum-Welch algorithm estimates the model parameters
+
+$$\theta = \{\boldsymbol{\pi}, \mathbf{A}, \mathbf{B}\}$$
+
+by iteratively maximizing the likelihood of the observed data:
+
+$$\theta^*=\arg\max_{\theta}P(X_{1:T} \mid \theta)$$
+  
+- To start the algorithm, the initial state distribution, transition matrix, and emission matrices need to be initialized. The final results are influences by the initialization, so we run the algorithm 25 times and select the output with the highest likelihood. 
 
 ## Results for Methodology No. 1: Discrete Emissions
-What did you find?
+### What does an example output look 
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
