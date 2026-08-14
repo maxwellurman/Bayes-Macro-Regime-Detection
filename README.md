@@ -178,6 +178,7 @@ Pulling the emission category with the maximum probability for each given state,
 | Unemployment_Rate_MoM_Change | Low       | High      | Low       | Low       |
 | Log_VIX_MonthAvg             | Low       | High      | Low       | High      |
 
+<img width="7997" height="3271" alt="r_GDP_and_states" src="https://github.com/user-attachments/assets/2607268b-ef7c-43e3-88e6-e25c15df0c41" />
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
