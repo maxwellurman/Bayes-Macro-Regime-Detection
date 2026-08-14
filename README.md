@@ -4,6 +4,9 @@
 What question are you investigating?
 
 ## Data
+### Data Source:
+We are using data macroeconomic data available from the Federal Reserve Bank of St. Louis (“FRED”).  The data is publicly available through FRED’s API.
+
 ### Raw Data Summary:
 | Variable                          | FRED Series   | Frequency    | Seasonally Adjusted             | Start Date   | End Date   |
 |:----------------------------------|:--------------|:-------------|:--------------------------------|:-------------|:-----------|
