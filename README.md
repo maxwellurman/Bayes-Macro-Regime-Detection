@@ -117,7 +117,20 @@ $$\theta^*=\arg\max_{\theta}P(X_{1:T} \mid \theta)$$
 - To start the algorithm, the initial state distribution, transition matrix, and emission matrices need to be initialized. The final results are influences by the initialization, so we run the algorithm 25 times and select the output with the highest likelihood. 
 
 ## Results for Methodology No. 1: Discrete Emissions
-### What does an example output look 
+### How many hidden states are there?
+
+There is no precise answer to this question.  AIC and BIC can be used to balance maximizing the log_likelihood and the number of parameters.  We reran the model with 2, 3, 4, and 5 states:
+
+|   n_states |   log_likelihood |   n_parameters |     AIC |     BIC |
+|-----------:|-----------------:|---------------:|--------:|--------:|
+|          2 |         -4226.02 |             43 | 8538.04 | 8711.57 |
+|          3 |         -3996.4  |             68 | 8128.8  | 8403.22 |
+|          4 |         -3831.64 |             95 | 7853.28 | 8236.65 |
+|          5 |         -3718.83 |            124 | 7685.66 | 8186.06 |
+
+This suggest that there are at least 5 states.  However, interpretability is also important.
+
+
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
