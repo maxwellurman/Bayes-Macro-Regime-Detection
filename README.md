@@ -154,6 +154,15 @@ Another factor is interpretability.  We use 4 states as a starting point.
 |   0.02793 |   0       |   0.04299 |   0.92908 |
 - This means that the economy rarely changes states month to month.  This aligns with expectations-- the economy doesn't bounce between expansionary and recessionary cycles often.
 
+**Learned Emission Matrices (Housing_Starts_YoY as an example):**
+| |   Low |   Middle |   High |
+|----------:|----------:|----------:|----------:|
+|   State_0 |   0.096 |   0.240 |   0.663 |
+|   State_1 |   0.490 |   0.315 |   0.195 |
+|   State_2 |   0.489 |   0.332 |   0.179 |
+|   State_3 |   0.220 |   0.490 |   0.290 |
+- Example Interpretation: The probability of Housing_Starts_YoY being High given State = State_0 is 0.663.
+- Therefore, State_0 is associated with "high" (i.e., a larger increase) in year over year housing starts.
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
