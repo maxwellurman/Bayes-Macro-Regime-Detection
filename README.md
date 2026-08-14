@@ -164,6 +164,21 @@ Another factor is interpretability.  We use 4 states as a starting point.
 - Example Interpretation: The probability of Housing_Starts_YoY being High given State = State_0 is 0.663.
 - Therefore, State_0 is associated with "high" (i.e., a larger increase) in year over year housing starts.
 
+Pulling the emission category with the maximum probability for each given state, can provide a more complete picture of each state.  However, categories may be very close in probability for a given state.
+| index                        | State_0   | State_1   | State_2   | State_3   |
+|:-----------------------------|:----------|:----------|:----------|:----------|
+| Yield_Curve_Spread_MonthEnd  | High      | High      | Low       | Low       |
+| CPI_YoY                      | Middle    | Low       | High      | Low       |
+| Industrial_Production_YoY    | Middle    | Low       | High      | Low       |
+| Industrial_Production_MoM    | Middle    | Low       | Middle    | Low       |
+| Housing_Starts_YoY           | High      | Low       | Low       | Middle    |
+| Housing_Starts_MoM           | High      | Low       | Middle    | Low       |
+| Real_PCE_YoY                 | High      | Low       | Middle    | High      |
+| Unemployment_Rate_YoY_Change | Low       | High      | Middle    | Middle    |
+| Unemployment_Rate_MoM_Change | Low       | High      | Low       | Low       |
+| Log_VIX_MonthAvg             | Low       | High      | Low       | High      |
+
+
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
 
