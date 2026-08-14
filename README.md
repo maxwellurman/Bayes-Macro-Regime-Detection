@@ -178,6 +178,10 @@ Pulling the emission category with the maximum probability for each given state,
 | Unemployment_Rate_MoM_Change | Low       | High      | Low       | Low       |
 | Log_VIX_MonthAvg             | Low       | High      | Low       | High      |
 
+**Most Likely State Plotted Against Real GDP**
+The red bars are recessionary months according to NBER.  The NBER does not use a formulaic methodology for establishing a recession, but instead looks at a variety of variables.  However, recessions tend to correspond to multiple quarters of declines in seasonally adjusted real GDP.
+
+Below, you can see that State_1 strongly corresponds to recessions.  During the provided time period, in 1990, 2001, 2008, and 2020, when the latent state changes to State_1, the economy enters into a decline in real GDP and a recession one or two months after the state transition. Notably, the state transitioned to State_1 in November 2025, yet we are not in a recession.   
 <img width="7997" height="3271" alt="r_GDP_and_states" src="https://github.com/user-attachments/assets/2607268b-ef7c-43e3-88e6-e25c15df0c41" />
 
 ## Methodology No. 2: Continuous Emissions
