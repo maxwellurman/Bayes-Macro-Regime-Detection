@@ -128,7 +128,19 @@ There is no precise answer to this question.  AIC and BIC can be used to balance
 |          4 |         -3831.64 |             95 | 7853.28 | 8236.65 |
 |          5 |         -3718.83 |            124 | 7685.66 | 8186.06 |
 
-This suggest that there are at least 5 states.  However, interpretability is also important.
+This suggest that there are at least 5 states.  
+
+Another metric to consider is sparsity.  Even if BIC improves, the model may create sparsely populated hidden states.  **Note** the state labels are not comparable between models.  In other words, State_0 could be a "recession" in the N=2 scenario and an "expansion" in the N=5 scenario.
+
+|   State_0 |   State_1 |   State_2 |   State_3 |   State_4 |
+|----------:|----------:|----------:|----------:|----------:|
+|       164 |       254 |         0 |         0 |         0 |
+|       114 |       178 |       126 |         0 |         0 |
+|       115 |        83 |       117 |       103 |         0 |
+|       110 |        91 |       106 |        74 |        37 |
+
+
+However, interpretability is also important.
 
 
 
