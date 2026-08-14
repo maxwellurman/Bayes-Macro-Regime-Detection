@@ -139,8 +139,12 @@ Another metric to consider is sparsity.  Even if BIC improves, the model may cre
 |       115 |        83 |       117 |       103 |         0 |
 |       110 |        91 |       106 |        74 |        37 |
 
+The fourth state is becoming sparsely populated, though there is an argument that enough timepoints are available.
 
-However, interpretability is also important.
+Another factor is interpretability.  We use 4 states as a starting point.
+
+### Visualizing / Interpreting 4 Latent States:
+
 
 
 
