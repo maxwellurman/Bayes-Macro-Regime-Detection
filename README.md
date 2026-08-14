@@ -17,13 +17,13 @@ What question are you investigating?
 | VIX                               | VIXCLS        | Daily, Close | Not Seasonally Adjusted         | 1990-01-02   | 2026-08-12 |
 | Real GDP                          | GDPC1         | Quarterly    | Seasonally Adjusted Annual Rate | 1947-01-01   | 2026-04-01 |
 
-### Cleaning Steps
+### Cleaning Steps:
 1. Create monthly variables for VIX by taking the monthly average.
 2. Create monthly variable for Yield Curve Spread by taking the month end value.
 3. Move quarterly, real, seasonally adjusted GDP to its own table (Real GDP is used to evaluate the model, not as an observed variable).
 4. Limit all variables to January 1990 to December 2025.
 
-### Feature Engineering
+### Feature Engineering:
 1. Create roughly stationary time series variables:
     - Raw CPI -> year-over-year percent change.
     - Raw Industrial Production -> year-over-year, quarter-over-quarter, and month-over-month percent change.
@@ -49,8 +49,8 @@ Note: We include both the annual change and monthly change series for Industrial
 |                  Log_VIX_MonthAvg |          Monthly | Log of Monthly Average of Daily VIX |
 
 
-### Example Time Series Plots
-
+### Example Time Series Plots:
+<img width="9538" height="7080" alt="time_series_plots" src="https://github.com/user-attachments/assets/832e7c75-1e63-4cee-9c63-6e1a7e4eac4b" />
 
 ## Methodology No. 1: Discrete Emissions
 What model/algorithm are you using?
