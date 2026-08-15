@@ -192,14 +192,14 @@ Pulling the emission category with the maximum probability for each given state,
 
 <img width="7997" height="3271" alt="r_GDP_and_states" src="https://github.com/user-attachments/assets/2607268b-ef7c-43e3-88e6-e25c15df0c41" />
 
-This is the same plot but with the maximum state probability plotted when it is less than 99%.  You can see that around regime changes there is more ambiguity between states.
+- This is the same plot but with the maximum state probability plotted when it is less than 99%.  You can see that around regime changes there is more ambiguity between states.
 <img width="12647" height="3271" alt="r_GDP_and_states_w _max_prob" src="https://github.com/user-attachments/assets/692a0afe-64b8-470b-962e-d16a4aceaada" />
 
 
 ### Visualizing / Interpreting 5 Latent States:
 **Most Likely State Plotted Against Real GDP**
-[[______]]
-
+- The BIC results suggested that the data could support a fifth regime.  Note that it is harder to interpret this version, even if it is "better" according to BIC.  An interesting result does appear here.  State_1 is associate with all the previous recessions, and States_0, 2, 3, and 4 with expansionary periods.  However, the last several years have been State_1.  This tells a story that this economic expansion is "different" than historic expansions.
+<img width="7997" height="3271" alt="r_GDP_and_states_5_states" src="https://github.com/user-attachments/assets/1adb0f17-e049-4fdf-bdef-422ab183d476" />
 
 ## Methodology No. 2: Continuous Emissions
 What model/algorithm are you using?
