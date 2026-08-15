@@ -1,7 +1,7 @@
 # U.S. Macroeconomic Regime Detection
 
 ## Overview
-What question are you investigating? [[Cathy to fill]]
+We investigate regime changes and latent states in the US economy using Hidden Markov Models.
 
 ## Data
 ### Data Source:
