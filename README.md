@@ -1,7 +1,7 @@
 # U.S. Macroeconomic Regime Detection
 
 ## Overview
-What question are you investigating?
+What question are you investigating? [[Cathy to fill]]
 
 ## Data
 ### Data Source:
@@ -208,31 +208,13 @@ What model/algorithm are you using?
 What did you find?
 
 ## Comparison of Approaches
-[[__]]
+[[__]]  [[Cathy to fill]]
 
 ## Repository Structure
-What are the important files?
+What are the important files?  [[Cathy to fill]]
 
 ## Installation / Requirements
-What packages are required?
+What packages are required?  [[Cathy to fill]]
 
 ## Running the Analysis
-What should someone run and in what order?
-
-Subscript:          x_i
-Superscript:        x^2
-Greek:              \alpha \beta \mu \sigma \Sigma
-Fraction:           \frac{a}{b}
-Square root:        \sqrt{x}
-Sum:                \sum_{i=1}^{n}
-Product:            \prod_{i=1}^{n}
-Integral:           \int_a^b
-Probability:        P(X \mid Y)
-Expectation:        \mathbb{E}[X]
-Vector:             \mathbf{x}
-Transpose:          x^\top
-Inverse:            \Sigma^{-1}
-Approximately:      \approx
-Less/equal:         \leq
-Greater/equal:      \geq
-Infinity:           \infty
+What should someone run and in what order?  [[Cathy to fill]]
