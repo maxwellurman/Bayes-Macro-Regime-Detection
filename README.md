@@ -342,7 +342,7 @@ This allows the model to identify **persistent macroeconomic regimes over time**
 
 ### 1. HMM Model Selection
 
-The number of hidden states ($k$) is evaluated based on **model fit, stability, state occupancy, and model complexity**.
+The number of hidden states ($k$) is evaluated based on **model fit, stability, state occupancy, and complexity**.
 
 | **k** | **Params** | **Log-L** | **BIC** | **Run Stability** | **Smallest State** |
 |------:|-----------:|----------:|--------:|------------------:|-------------------:|
@@ -353,11 +353,22 @@ The number of hidden states ($k$) is evaluated based on **model fit, stability, 
 
 **Key findings:**
 
-- **Model fit improves with more states:** Log-likelihood increases and BIC decreases through $k=5$, despite the increase in model complexity.
-- **Stability favors fewer states:** $k=3$ has the highest run stability (**99.0%**), while stability falls to **75.4%** at $k=4$ and **68.9%** at $k=5$. Stability measures how consistently repeated model fits identify the same hidden regimes.
-- **Higher-state models create sparse regimes:** The smallest state falls from **18.1% at $k=3$** to **4.1% at $k=4$** and **1.4% at $k=5$**.
+- **Fit favors more states:** BIC improves through $k=5$.
+- **Stability favors fewer states:** Stability measures how consistently repeated model fits identify the same hidden regimes. Run stability declines from **99.0% at $k=3$** to **68.9% at $k=5$.
+- **Complexity increases:** Higher-state models introduce more parameters and smaller, more specialized regimes.
 
-**Takeaway:** The results show a tradeoff between **better statistical fit and greater stability/parsimony**. While BIC favors $k=5$, the 3-state model is substantially more stable and avoids very small states; the final choice therefore also considers whether the additional states provide meaningful economic interpretation.
+**Takeaway:** The diagnostics show a tradeoff between **fit and stability/parsimony**. Since no single metric provides a clear overall winner, the final state count also considers whether the additional states provide meaningful economic structure.
+
+### 2. Final State Selection
+
+The final choice focuses on **$k=4$ vs. $k=5$**:
+
+- **$k=4$** is simpler and more stable (**75.4%**).
+- **$k=5$** provides better statistical fit (**BIC = 6977.9**) but lower stability (**68.9%**).
+- The additional complexity of $k=5$ is evaluated next by examining whether the extra state produces **distinct and economically meaningful regimes**.
+
+**Selection approach:** The **5-state HMM** is carried forward as the primary candidate based on its stronger fit, while the **4-state model** serves as the more stable and parsimonious benchmark. Final support for $k=5$ depends on the state interpretation that follows.
+
 
 ## Comparison of Approaches
 Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
