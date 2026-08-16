@@ -389,9 +389,6 @@ State-specific distributions show the typical macroeconomic profile of each regi
 
 **State-selection implication:** The 5-state specification produces economically distinct and historically recognizable regimes rather than simply splitting the data into additional statistical clusters. In particular, it separates different expansion environments and distinguishes **acute stress from the unusual post-crisis rebound**.
 
-> **Validation note:** These labels are assigned after model fitting. NBER recession dates are not used to train the HMM; they are examined next as an external check on the inferred regimes.
-
-
 
 ## Comparison of Approaches
 Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
