@@ -354,7 +354,7 @@ The number of hidden states ($k$) is evaluated based on **model fit, stability, 
 **Key findings:**
 
 - **Model fit improves with more states:** Log-likelihood increases and BIC decreases through $k=5$, despite the increase in model complexity.
-- **Stability favors fewer states:** $k=3$ has the highest run stability (**99.0%**), while stability falls to **75.4%** at $k=4$ and **68.9%** at $k=5$.
+- **Stability favors fewer states:** $k=3$ has the highest run stability (**99.0%**), while stability falls to **75.4%** at $k=4$ and **68.9%** at $k=5$. Stability measures how consistently repeated model fits identify the same hidden regimes.
 - **Higher-state models create sparse regimes:** The smallest state falls from **18.1% at $k=3$** to **4.1% at $k=4$** and **1.4% at $k=5$**.
 
 **Takeaway:** The results show a tradeoff between **better statistical fit and greater stability/parsimony**. While BIC favors $k=5$, the 3-state model is substantially more stable and avoids very small states; the final choice therefore also considers whether the additional states provide meaningful economic interpretation.
