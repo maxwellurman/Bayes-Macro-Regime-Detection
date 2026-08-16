@@ -373,7 +373,7 @@ The final choice focuses on **$k=4$ vs. $k=5$**:
 
 The state-specific distributions describe the typical macroeconomic conditions within each hidden regime. Key distinguishing features are summarized below.
 
-| State | Share | Key Economic Profile | Preliminary Interpretation |
+| State | % of Months | Key Economic Profile | Preliminary Interpretation |
 |---|---:|---|---|
 | **State 0** | 34.5% | Strong IP growth (**+3.93%**), Fed Funds rising (**+1.01 pp**), relatively flat yield curve | **Hiking-Cycle Expansion** |
 | **State 1** | 1.4% | Weak trailing IP (**−8.46%**), rapidly falling unemployment (**−1.18 pp**), housing rebound (**+5.93%**), strong Fed easing (**−2.11 pp**) | **Sharp Rebound / Snapback** |
