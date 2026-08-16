@@ -369,6 +369,23 @@ The final choice focuses on **$k=4$ vs. $k=5$**:
 
 **Selection approach:** The **5-state HMM** is carried forward as the primary candidate based on its stronger fit, while the **4-state model** serves as the more stable and parsimonious benchmark. Final support for $k=5$ depends on the state interpretation that follows.
 
+### 3. Economic Interpretation of Hidden States
+
+The state-specific distributions describe the typical macroeconomic conditions within each hidden regime. Key distinguishing features are summarized below.
+
+| State | Share | Key Economic Profile | Preliminary Interpretation |
+|---|---:|---|---|
+| **State 0** | 34.5% | Strong IP growth (**+3.93%**), Fed Funds rising (**+1.01 pp**), relatively flat yield curve | **Hiking-Cycle Expansion** |
+| **State 1** | 1.4% | Weak trailing IP (**−8.46%**), rapidly falling unemployment (**−1.18 pp**), housing rebound (**+5.93%**), strong Fed easing (**−2.11 pp**) | **Sharp Rebound / Snapback** |
+| **State 2** | 27.9% | Strong housing growth (**+12.12%**), steep yield curve (**1.72**), lowest VIX | **Calm / Housing-Led Expansion** |
+| **State 3** | 26.9% | Flat IP (**−0.09%**), weakening housing (**−3.28%**), Fed easing (**−1.26 pp**) | **Slowing / Easing Economy** |
+| **State 4** | 9.3% | Weak IP (**−1.77%**), sharp housing weakness (**−9.96%**), highest VIX, Fed easing (**−1.20 pp**) | **Elevated Stress / Contraction** |
+
+**Key takeaway:** The model separates several persistent expansion/slowdown environments from two more distinctive states: **State 4 captures elevated economic and market stress**, while **State 1 captures a short, sharp rebound pattern**.
+
+> **Note:** These are preliminary economic labels based on the learned state distributions. The historical timeline and NBER recession comparison are used next to validate whether these interpretations align with actual economic episodes.
+
+
 
 ## Comparison of Approaches
 Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
