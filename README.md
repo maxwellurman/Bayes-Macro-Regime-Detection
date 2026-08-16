@@ -371,19 +371,25 @@ The final choice focuses on **$k=4$ vs. $k=5$**:
 
 ### 3. Economic Interpretation of Hidden States
 
-The state-specific distributions describe the typical macroeconomic conditions within each hidden regime. Key distinguishing features are summarized below.
+State-specific distributions show the typical macroeconomic profile of each regime. Historical assignments provide an additional check on whether these profiles correspond to recognizable economic periods.
 
-| State | % of Months | Key Economic Profile | Preliminary Interpretation |
-|---|---:|---|---|
-| **State 0** | 34.5% | Strong IP growth (**+3.93%**), Fed Funds rising (**+1.01 pp**), relatively flat yield curve | **Hiking-Cycle Expansion** |
-| **State 1** | 1.4% | Weak trailing IP (**−8.46%**), rapidly falling unemployment (**−1.18 pp**), housing rebound (**+5.93%**), strong Fed easing (**−2.11 pp**) | **Sharp Rebound / Snapback** |
-| **State 2** | 27.9% | Strong housing growth (**+12.12%**), steep yield curve (**1.72**), lowest VIX | **Calm / Housing-Led Expansion** |
-| **State 3** | 26.9% | Flat IP (**−0.09%**), weakening housing (**−3.28%**), Fed easing (**−1.26 pp**) | **Slowing / Easing Economy** |
-| **State 4** | 9.3% | Weak IP (**−1.77%**), sharp housing weakness (**−9.96%**), highest VIX, Fed easing (**−1.20 pp**) | **Elevated Stress / Contraction** |
+| State | % of Months | Key Economic Profile | Representative Periods | Preliminary Interpretation |
+|---|---:|---|---|---|
+| **State 0** | 34.5% | Strong IP growth (**+3.93%**), rising Fed Funds (**+1.01 pp**), relatively flat yield curve | 1994–2001; 2004–06; 2021–23 | **Hiking-Cycle Expansion** |
+| **State 1** | 1.4% | Weak trailing IP (**−8.46%**) but rapidly falling unemployment (**−1.18 pp**), housing rebound (**+5.93%**), deep Fed cuts (**−2.11 pp**) | May–Oct 2020 | **Post-Crisis Snapback** |
+| **State 2** | 27.9% | Strongest housing growth (**+12.12%**), steep yield curve (**1.72**), lowest VIX | 2003–04; 2011–18 | **Steady / Housing-Led Expansion** |
+| **State 3** | 26.9% | Flat IP (**−0.09%**), weakening housing (**−3.28%**), moderate Fed easing (**−1.26 pp**) | 2006–08; 2019–early 2020; 2023–25 | **Slowdown / Policy Easing** |
+| **State 4** | 9.3% | Weak IP (**−1.77%**), sharp housing weakness (**−9.96%**), highest VIX, Fed easing (**−1.20 pp**) | 2008–09; Mar–Apr 2020 | **Elevated Stress / Contraction** |
 
-**Key takeaway:** The model separates several persistent expansion/slowdown environments from two more distinctive states: **State 4 captures elevated economic and market stress**, while **State 1 captures a short, sharp rebound pattern**.
+**Key findings:**
 
-> **Note:** These are preliminary economic labels based on the learned state distributions. The historical timeline and NBER recession comparison are used next to validate whether these interpretations align with actual economic episodes.
+- **States 0 and 2** represent two distinct expansion environments: a **policy-tightening expansion** versus a **calmer, housing-led expansion**.
+- **State 3** captures broader slowing/easing conditions, while **State 4** represents shorter periods of substantially greater economic and market stress.
+- **State 1** is highly specialized but economically interpretable: all six months occur during the **May–October 2020 post-crisis rebound**.
+
+**State-selection implication:** The 5-state specification produces economically distinct and historically recognizable regimes rather than simply splitting the data into additional statistical clusters. In particular, it separates different expansion environments and distinguishes **acute stress from the unusual post-crisis rebound**.
+
+> **Validation note:** These labels are assigned after model fitting. NBER recession dates are not used to train the HMM; they are examined next as an external check on the inferred regimes.
 
 
 
