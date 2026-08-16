@@ -30,22 +30,22 @@ We are using data macroeconomic data available from the Federal Reserve Bank of 
 1. Create roughly stationary time series variables:
     - Raw CPI -> year-over-year percent change.
     - Raw Industrial Production -> year-over-year, quarter-over-quarter, and month-over-month percent change.
-    - Raw Housing Starts -> First create rolling, 3-month trailing average.  Housing Starts are noisy month over month.  Then, calculate year-over-year, quarter-over-quarter, and month-over-month percent change in the rolling average metric.
+    - Raw Housing Starts -> year-over-year, quarter-over-quarter, and month-over-month percent change.
     - Unemployment Rate -> year-over-year, quarter-over-quarter, and month-over-month change (since already a percentage).
 2. Create Real PCE level by deflating Nominal PCE using the CPI. Then, create year-over-year percent change in Real PCE.
 3. Log transform of VIX. VIX is strongly right-skewed.
 4. **Discretize** the variables into 3 quantiles for the discrete emission analysis.
 
 ### Final Analytical Dataset
-Note: We include both the annual change and monthly change series for Industrial Production, Smoothed Housing Starts, and Unemployment Rate to account for short term and long term momentum.  For example, coming out of a recession, year-over-year change in Smoothed Housing Starts might be flat or negative, but month-over-month change might be positive.
+Note: We include both the annual change and monthly change series for Industrial Production, Housing Starts, and Unemployment Rate to account for short term and long term momentum.  For example, coming out of a recession, year-over-year change in Housing Starts might be flat or negative, but month-over-month change might be positive.
 |   Variable |   Frequency |   Description |
 |-------------------:|-----------------:|------:|
 |                  Yield_Curve_Spread_MonthEnd |          Monthly | Month End Value |
 |                  CPI_YOY |          Monthly | Percent Change YoY |
 |                  Industrial_Production_YoY |          Monthly | Percent Change YoY |
 |                  Industrial_Production_MoM |          Monthly | Percent Change MoM |
-|                  Housing_Starts_YoY |          Monthly | Percent Change YoY in Smoothed Trailing 3-Mo Avg. |
-|                  Housing_Starts_MoM |          Monthly | Percent Change MoM in Smoothed Trailing 3-Mo Avg. |
+|                  Housing_Starts_YoY |          Monthly | Percent Change YoY |
+|                  Housing_Starts_MoM |          Monthly | Percent Change MoM |
 |                  Unemployment_Rate_YoY_Change |          Monthly | Change YoY |
 |                  Unemployment_Rate_MoM_Change |          Monthly | Change MoM |
 |                  Real_PCE_YoY |          Monthly | Percent Change YoY |
