@@ -405,7 +405,29 @@ For example, VIX values of 35 and 80 might both be classified as **High** in the
 > **Note:** The current Gaussian HMM uses maximum-likelihood EM/Baum-Welch estimation. It does not perform full Bayesian inference over the HMM parameters.
 
 ## Results for Methodology No. 2: Continuous Emissions
-What did you find?
+
+### 1. HMM Model Selection
+
+The number of hidden states (\(k\)) is evaluated using **model fit, complexity, stability across repeated model runs, and state occupancy**.
+
+| **k** | **Params** | **Log-L** | **BIC** | **Run Stability** | **Smallest State** |
+|------:|-----------:|----------:|--------:|------------------:|-------------------:|
+| 2 | 91  | -3544.6 | 7639.0 | 98.2% | 31.0% |
+| 3 | 140 | -3264.9 | 7375.4 | **99.0%** | 18.1% |
+| 4 | 191 | -2994.4 | 7142.5 | 75.4% | 4.1% |
+| 5 | 244 | -2752.0 | **6977.9** | 68.9% | 1.4% |
+
+**Metric interpretation:**
+
+- **Params:** Number of estimated model parameters; increases with model complexity.
+- **Log-L:** Model log-likelihood; higher (less negative) indicates better fit to the observed data.
+- **BIC:** Bayesian Information Criterion; balances model fit against complexity. **Lower is better.**
+- **Run Stability:** Measures how consistently repeated model runs identify the same hidden regimes. Higher state-assignment agreement indicates a more stable and reproducible solution.
+- **Smallest State:** Percentage of observations assigned to the least-populated hidden state. Very small values may indicate a sparse or highly specialized regime.
+
+![HMM model selection diagnostics](fig_model_selection.png)
+
+**Model-selection takeaway:** AIC and BIC improve as the number of hidden states increases, with no clear information-criterion elbow through \(k=5\). However, state assignments are most consistent for \(k=2\) and \(k=3\), while stability declines substantially for \(k=4\) and \(k=5\). Higher-state models also introduce increasingly sparse regimes, highlighting the tradeoff between **statistical fit, stability, and parsimony**.
 
 ## Comparison of Approaches
 [[__]]  [[Cathy to fill]]
