@@ -459,12 +459,14 @@ The number of hidden states (\(k\)) is evaluated using **model fit, complexity, 
 
 **Model-selection takeaway:** AIC and BIC improve as the number of hidden states increases, with no clear information-criterion elbow through \(k=5\). However, state assignments are most consistent for \(k=2\) and \(k=3\), while stability declines substantially for \(k=4\) and \(k=5\). Higher-state models also introduce increasingly sparse regimes, highlighting the tradeoff between **statistical fit, stability, and parsimony**.
 
- Comparison of Approaches
-[[__]]  [[Cathy to fill]]
-[[]] - Cathy to fill, waiting for final results?
+## Comparison of Approaches
+Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
+The discrete model identified a recession-like state that aligned closely with the 1990–91, 2001, 2008–09, and 2020 recessions. It also showed higher uncertainty around several regime transitions, suggesting that economic turning points are not always clearly classified.
+The continuous model identified [______]. Compared with the discrete model, it [_______identified similar/different turning points, produced more/fewer states, showed greater/less sensitivity around specific periods, something - TBD results].
+Overall, the two approaches [_______showed similar / different broad regime patterns / in ___ periods]. The discrete approach produced simpler and more interpretable state profiles, while the continuous approach preserved more information about the magnitude and joint behavior of the economic variables. The results suggest that the two approaches provide complementary views of macroeconomic regimes rather than one clearly outperforming the other. Depending on the use case and degree of inter-pretability required, the continuous model could be more practical for deeper or continued analysis, and the discrete model’s results could be more easily communicated to a broader audience.
+
 
 ## Repository Structure
-What are the important files?  [[Cathy to fill]]
 What are the important files?  
 1. Create_Dataset_v2.ipynb - cleans data and creates dataset for analysis
 2. Continuous_HMM_Regime_Model_v3.ipynb - runs continuous-emission HMM
@@ -475,7 +477,6 @@ What are the important files?
 
 
 ## Installation / Requirements
-What packages are required?  [[Cathy to fill]]
 What packages are required? 
 1. pandas
 2. numbpy
@@ -486,7 +487,6 @@ What packages are required?
 7. requests
 
 ## Running the Analysis
-What should someone run and in what order?  [[Cathy to fill]]
 What should someone run and in what order? 
 1. Run Create_Dataset_v2.ipynb to create the cleaned datasets
 2. Run Discrete Emissions.ipynb to run the discrete-emission HMM
