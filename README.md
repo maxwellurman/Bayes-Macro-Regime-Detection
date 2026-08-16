@@ -342,7 +342,7 @@ This allows the model to identify **persistent macroeconomic regimes over time**
 
 ### 1. HMM Model Selection
 
-The number of hidden states (\(k\)) is evaluated using **model fit, complexity, stability across repeated model runs, and state occupancy**.
+The number of hidden states ($k$) is evaluated based on **model fit, stability, state occupancy, and model complexity**.
 
 | **k** | **Params** | **Log-L** | **BIC** | **Run Stability** | **Smallest State** |
 |------:|-----------:|----------:|--------:|------------------:|-------------------:|
@@ -351,17 +351,13 @@ The number of hidden states (\(k\)) is evaluated using **model fit, complexity, 
 | 4 | 191 | -2994.4 | 7142.5 | 75.4% | 4.1% |
 | 5 | 244 | -2752.0 | **6977.9** | 68.9% | 1.4% |
 
-**Metric interpretation:**
+**Key findings:**
 
-- **Params:** Number of estimated model parameters; increases with model complexity.
-- **Log-L:** Model log-likelihood; higher (less negative) indicates better fit to the observed data.
-- **BIC:** Bayesian Information Criterion; balances model fit against complexity. **Lower is better.**
-- **Run Stability:** Measures how consistently repeated model runs identify the same hidden regimes. Higher state-assignment agreement indicates a more stable and reproducible solution.
-- **Smallest State:** Percentage of observations assigned to the least-populated hidden state. Very small values may indicate a sparse or highly specialized regime.
+- **Model fit improves with more states:** Log-likelihood increases and BIC decreases through $k=5$, despite the increase in model complexity.
+- **Stability favors fewer states:** $k=3$ has the highest run stability (**99.0%**), while stability falls to **75.4%** at $k=4$ and **68.9%** at $k=5$.
+- **Higher-state models create sparse regimes:** The smallest state falls from **18.1% at $k=3$** to **4.1% at $k=4$** and **1.4% at $k=5$**.
 
-![HMM model selection diagnostics](fig_model_selection.png)
-
-**Model-selection takeaway:** AIC and BIC improve as the number of hidden states increases, with no clear information-criterion elbow through \(k=5\). However, state assignments are most consistent for \(k=2\) and \(k=3\), while stability declines substantially for \(k=4\) and \(k=5\). Higher-state models also introduce increasingly sparse regimes, highlighting the tradeoff between **statistical fit, stability, and parsimony**.
+**Takeaway:** The results show a tradeoff between **better statistical fit and greater stability/parsimony**. While BIC favors $k=5$, the 3-state model is substantially more stable and avoids very small states; the final choice therefore also considers whether the additional states provide meaningful economic interpretation.
 
 ## Comparison of Approaches
 Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
@@ -394,6 +390,6 @@ What packages are required?
 What should someone run and in what order? 
 1. Run Create_Dataset_v2.ipynb to create the cleaned datasets
 2. Run Discrete Emissions.ipynb to run the discrete-emission HMM
-3. Run Continuous_HMM_Regime_Model_v3.ipynb to run the continuous-emission HMM
+3. Run Continuous_HMM_Regime_Model.ipynb to run the continuous-emission HMM
 4. Compare the inferred regimes with recession periods, each other, GDP, and other indicators as needed
 Footer
