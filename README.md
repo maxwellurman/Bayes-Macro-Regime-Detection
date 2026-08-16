@@ -205,7 +205,7 @@ Pulling the emission category with the maximum probability for each given state,
 
 ### Continuous Emissions — Feature Engineering
 
-#### Feature and Momentum Summary
+#### 1. Feature and Momentum Summary
 
 The continuous model uses a combination of **short-term momentum, long-term trends, and economically meaningful level variables** to represent different aspects of macroeconomic conditions:
 
@@ -217,13 +217,25 @@ The continuous model uses a combination of **short-term momentum, long-term tren
 
 > **Housing Starts:** Raw 12-month YoY growth is retained because the YoY horizon already reduces short-term noise, while the full-covariance Gaussian HMM can absorb remaining variability within each state's covariance structure.
 
-**Model-specific choice:** The continuous specification retains **Federal Funds Rate momentum**, while the discrete model excludes it.
+**Model-specific choice:** The continuous specification retains **Federal Funds Rate momentum**, using the 12-month change to capture broader monetary-policy cycles rather than infrequent month-to-month moves. 
+
+#### 2. Feature Diagnostics and Selection Decisions
+
+Candidate features are evaluated using **distribution, correlation, and outlier diagnostics** to support the final selection.
+
+| Diagnostic | Key Result | Decision |
+|---|---|---|
+| **Skewness / ST Noise** | Unemployment ST has the highest skew (**15.13**); Industrial Production ST is also highly skewed (**−5.29**). ST measures are generally noisier than LT measures. | Favor **LT measures** for Industrial Production, Real PCE, and Housing Starts. Keep **Unemployment ST** as an important turning-point signal. |
+| **Real-Activity Redundancy** | Real PCE and Industrial Production momentum are correlated at both horizons (**ST r = 0.67; LT r = 0.67**). | **Drop Real PCE momentum** and retain **Industrial Production LT** to reduce overlapping real-activity signals. |
+| **Activity vs. Labor** | Industrial Production / Real PCE and Unemployment are negatively correlated (**r ≈ −0.69 to −0.74**). | **Keep Unemployment.** Although correlated with growth measures, it captures a different economic dimension: **labor-market conditions rather than economic activity**. |
+| **Extreme Outlier** | Unemployment ST reaches **52.0 IQR units** in April 2020 due to the COVID unemployment shock. | **Keep Unemployment ST**, but winsorize the extreme tail before robust scaling to prevent one shock from dominating the Gaussian HMM. |
+
+**Selection takeaway:** The results generally favor **long-term measures over short-term measures**. PCE momentum is removed due to overlap with Industrial Production, while short-term unemployment is retained as an important turning-point signal.
 
 
+#### 3. Final Continuous-HMM Feature Set
 
-### Final Continuous-HMM Feature Set
-
-Based on the diagnostic screening above, **8 economically distinct features** are selected, balancing short- and long-term signals while limiting unnecessary redundancy.
+Based on the diagnostics above, **8 economically distinct features** are selected, balancing short- and long-term information while limiting unnecessary redundancy.
 
 | Feature | Economic Signal | Selection Rationale |
 |---|---|---|
@@ -233,12 +245,12 @@ Based on the diagnostic screening above, **8 economically distinct features** ar
 | `Housing_Starts_LT_Momentum` | Housing activity | Captures rate-sensitive housing-cycle conditions distinct from Industrial Production. |
 | `Unemployment_Rate_ST_Momentum` | Labor market | Captures short-term labor-market changes and economic turning points. |
 | `Federal_Funds_Rate_LT_Momentum` | Monetary policy | Captures the broader hiking/cutting cycle; LT is retained over ST for parsimony (**ST/LT r = 0.59**). |
-| `Yield_Curve_Spread_MonthAvg` | Yield curve | Captures the level of the yield curve as a forward-looking economic signal. |
+| `Yield_Curve_Spread_MonthAvg` | Yield curve | Provides a forward-looking signal of economic conditions. |
 | `Log_VIX_MonthAvg` | Market stress | Captures financial-market stress while the log transformation reduces VIX skew. |
 
 **Final analytical input:** 8 features covering **inflation, real activity, housing, labor conditions, monetary policy, the yield curve, and market stress**.
 
-> **Note:** Feature selection reduces unnecessary redundancy rather than requiring independent inputs. The full-covariance Gaussian HMM directly models how the selected macroeconomic variables move together within each hidden regime.
+> **Modeling note:** Feature selection reduces unnecessary redundancy; it does not require the inputs to be independent. The full-covariance Gaussian HMM directly learns how the selected macroeconomic variables move together within each hidden regime.
 
 ### Methodology Walkthrough
 
