@@ -203,7 +203,24 @@ Pulling the emission category with the maximum probability for each given state,
 
 ## Methodology No. 2: Continuous Emissions
 
-### Continuous Emissions — Levels and Momentum
+### Continuous Emissions — Feature Engineering
+
+#### Short- and Long-Horizon Signals
+
+Additional signals are constructed to capture both **recent economic momentum** and **longer-term economic conditions**:
+
+- **Growth variables** — CPI, Industrial Production, Housing Starts, and Real PCE use **1-month percent change (MoM)** for short-term momentum and **12-month percent change (YoY)** for long-term momentum.
+
+- **Rate variables** — Unemployment Rate and Federal Funds Rate use **1-month and 12-month changes in percentage points**.
+
+- **Level variables** — Yield Curve Spread and VIX are retained as levels because their absolute values provide meaningful signals of **economic expectations and market stress**, respectively. Monthly-average values are used to reduce daily noise, with VIX additionally log-transformed.
+
+> **Housing Starts:** Raw 12-month YoY growth is retained because the YoY horizon already reduces short-term noise, while the full-covariance Gaussian HMM can absorb remaining variability within each state's covariance structure.
+
+**Model-specific choices:** The continuous model retains Federal Funds Rate momentum and uses the monthly-average yield-curve spread.
+
+> **Preprocessing note:** The final continuous features are robustly scaled using the median and IQR before Gaussian HMM estimation; details are provided in the methodology section.
+
 
 ### Methodology Walkthrough
 
