@@ -252,187 +252,91 @@ Based on the diagnostics above, **8 economically distinct features** are selecte
 
 > **Modeling note:** Feature selection reduces unnecessary redundancy; it does not require the inputs to be independent. The full-covariance Gaussian HMM directly learns how the selected macroeconomic variables move together within each hidden regime.
 
-### Methodology Walkthrough
+### Continuous Emissions — Methodology Walkthrough
 
-#### 1. Gaussian Hidden Markov Model Setup
+#### 1. Gaussian HMM Framework
 
-We use a **Gaussian Hidden Markov Model (Gaussian HMM)** with K hidden states representing unobserved macroeconomic regimes:
+We use a **Gaussian Hidden Markov Model (Gaussian HMM)** to infer unobserved macroeconomic regimes over time:
 
 $$
 S_t \in \{1, 2, \ldots, K\}
 $$
 
-The state $S_t$ is **latent**, meaning that we do not directly observe whether a month is in an expansion, slowdown, or contraction regime. Instead, the HMM infers the hidden state from the observed macroeconomic data.
-
-Unlike the discrete-emission model, the continuous model does **not** convert observations into Low / Middle / High categories. It retains the actual continuous values of the macroeconomic features.
-
-For each month $t$, the observed variables form a feature vector:
+The hidden state $S_t$ represents the underlying economic regime in month $t$. The regime is not directly observed; instead, it is inferred from the macroeconomic feature vector:
 
 $$
 X_t = (X_{1,t}, X_{2,t}, \ldots, X_{p,t})
 $$
 
-where $p$ is the number of macroeconomic features included in the model.
+Unlike the discrete HMM, the continuous model retains the **actual numerical values** of the macroeconomic features.
 
+The model has three core components:
 
-#### 2. HMM Components
+- **Initial state probabilities:** $\pi_k = P(S_0 = k)$ describe the probability of starting in each regime.
+- **Transition probabilities:** $A_{ij} = P(S_t = j \mid S_{t-1} = i)$ describe how likely the economy is to remain in or move between regimes.
+- **Gaussian emissions:** describe the macroeconomic conditions associated with each hidden regime.
 
-The Gaussian HMM contains three main components:
-
-**Initial State Distribution**
-
-The initial state distribution describes the probability that the economy begins in each hidden state:
-
-$$
-\pi_k = P(S_0 = k)
-$$
-
-**Transition Matrix**
-
-The transition probabilities describe how the hidden economic regime evolves over time:
-
-$$
-A_{ij} = P(S_t = j \mid S_{t-1} = i)
-$$
-
-A high probability of remaining in the same state indicates a **persistent regime**.
-
-**Continuous Emission Distribution**
-
-The main difference from the discrete HMM is the emission model.
-
-For each hidden state $k$, the observed macroeconomic feature vector follows a multivariate Gaussian distribution:
+For each state $k$:
 
 $$
 X_t \mid S_t = k \sim N(\mu_k, \Sigma_k)
 $$
 
-where:
+where $\mu_k$ represents the state's typical macroeconomic conditions and $\Sigma_k$ captures the variability and relationships among the features within that regime.
 
-- $\mu_k$ represents the typical macroeconomic conditions of state $k$.
-- $\Sigma_k$ represents the covariance structure among the macroeconomic features within state $k$.
-
-Therefore, each hidden state represents a different **joint macroeconomic environment**.
+Together, the mean and covariance define the **economic profile of each hidden state**.
 
 
-#### 3. Feature Processing
+#### 2. Continuous Feature Processing
 
-The model uses economically meaningful features designed to capture both the **current condition** and **momentum** of the economy.
-
-- Short-term changes capture recent economic momentum.
-- Long-term changes capture broader economic trends.
-- Level variables capture economically meaningful conditions such as the yield curve and market stress.
-
-Because the continuous features have different units and scales, they are standardized using **robust scaling**.
-
-The robust-scaled observation is:
+Before fitting the Gaussian HMM, the selected features are lightly winsorized and **robustly scaled**:
 
 $$
 Z_{i,t} = \frac{X_{i,t} - \text{median}(X_i)}{\text{IQR}(X_i)}
 $$
 
-where the median centers each feature and the IQR scales it by its typical spread.
+Robust scaling puts variables with different units on comparable scales while reducing sensitivity to extreme historical observations.
 
-Robust scaling puts the variables on comparable scales while being less sensitive to extreme historical observations than conventional mean/standard-deviation scaling.
-
-A very small number of extreme observations are also lightly winsorized before scaling. This helps prevent isolated shocks from dominating the Gaussian estimation and creating artificial one-month regimes.
+Light winsorization is applied only to extreme tails so that isolated shocks do not dominate the Gaussian estimation or create artificial one-month regimes.
 
 
-#### 4. Gaussian HMM Estimation
+#### 3. Model Estimation
 
-For each hidden state, the model estimates:
+The Gaussian HMM learns:
 
-- Initial state probabilities: $\pi$
-- Transition probabilities: $A$
-- State-specific mean vectors: $\mu_k$
-- State-specific covariance matrices: $\Sigma_k$
+- the initial state probabilities $\pi$
+- the transition matrix $A$
+- a mean vector $\mu_k$ for each state
+- a covariance matrix $\Sigma_k$ for each state
 
-Collectively, these model parameters are represented by $\theta$.
-
-The parameters are estimated using the **Expectation-Maximization (EM) / Baum-Welch algorithm**.
-
-The objective is to select the parameter values that maximize the likelihood of the observed macroeconomic sequence:
+These parameters are estimated using the **Expectation-Maximization (EM) / Baum-Welch algorithm** to maximize the likelihood of the observed macroeconomic sequence:
 
 $$
 \theta^* = \arg\max_{\theta} P(X_{1:T} \mid \theta)
 $$
 
-Intuitively, the algorithm repeatedly performs two steps:
+The algorithm iterates between two steps:
 
-1. **E-step:** Estimate the probability that each month belongs to each hidden economic state.
-2. **M-step:** Update the initial-state probabilities, transition probabilities, state means, and covariance matrices so that the model better explains the observed data.
+1. **E-step:** Estimate the probability that each month belongs to each hidden state.
+2. **M-step:** Update the transition probabilities and Gaussian emission parameters to better explain the observed data.
 
-These steps repeat until the likelihood converges.
-
-Because the final solution can depend on initialization, the model is fitted multiple times using different random starting values, and the solution with the highest likelihood is retained.
+The process repeats until the likelihood converges. Because the solution can depend on initialization, the model is fitted from multiple random starting points and the highest-likelihood solution is retained.
 
 
-#### 5. How the Model Infers Economic Regimes
+#### 4. Inferring Economic Regimes
 
-For each month, the model essentially asks:
+For each month, the HMM combines two sources of information:
 
-> Given this month's inflation, economic activity, labor-market conditions, monetary policy, yield curve, and market stress, which hidden state's economic profile is most likely to have generated these observations?
-
-The HMM combines two pieces of information:
-
-1. **Emission information:** How closely the observed macroeconomic conditions match each state's Gaussian distribution.
-2. **Transition information:** How likely the economy is to move from the previous month's state into each possible current state.
+1. **Emission likelihood:** How well the observed macroeconomic conditions match each state's Gaussian profile.
+2. **Transition probability:** How likely each state is given the previous economic regime.
 
 Conceptually:
 
-**Observed macroeconomic conditions → State likelihoods → Transition probabilities → Inferred hidden regime**
+**Previous regime + Current macroeconomic conditions → State probabilities → Inferred hidden regime**
 
-This allows the HMM to identify **persistent economic regimes through time**, rather than simply clustering each month independently.
+This allows the model to identify **persistent macroeconomic regimes over time**, rather than treating each month as an independent observation.
 
-
-#### 6. Interpretation of Hidden States
-
-The economic meaning of each hidden state is **not specified before fitting the model**.
-
-The HMM first identifies numerical states such as State 0, State 1, State 2, and so on. Each state is then interpreted using:
-
-- Its macroeconomic feature profile
-- Its transition probabilities and persistence
-- The historical periods assigned to the state
-- External economic references such as NBER recession periods
-
-For example, a state characterized by weak economic activity, deteriorating labor conditions, and elevated VIX may be interpreted as a **stress / contraction regime**.
-
-Importantly, NBER recession dates are **not used to train the HMM**. They are used afterward to help interpret and externally validate the inferred regimes.
-
-
-#### 7. Core Difference from the Discrete-Emission HMM
-
-Both the discrete and continuous approaches use the same underlying HMM structure:
-
-$$
-S_{t-1} \rightarrow S_t \rightarrow X_t
-$$
-
-Both models use observed macroeconomic information to infer hidden regimes and estimate how those regimes persist and transition through time.
-
-The key difference is the **emission assumption**.
-
-The discrete model converts each observation into a category such as Low / Middle / High and estimates:
-
-$$
-P(X_{i,t} = c \mid S_t = k)
-$$
-
-The continuous model retains the actual numerical values and assumes:
-
-$$
-X_t \mid S_t = k \sim N(\mu_k, \Sigma_k)
-$$
-
-Therefore:
-
-- **Discrete emissions** simplify the observations into categories, making the model easier to interpret and naturally more robust to extreme values.
-- **Continuous emissions** preserve the magnitude and joint relationships among the macroeconomic variables, allowing a richer description of each regime.
-
-For example, VIX values of 35 and 80 might both be classified as **High** in the discrete model. The continuous model preserves the difference in magnitude between these two observations.
-
-> **Note:** The current Gaussian HMM uses maximum-likelihood EM/Baum-Welch estimation. It does not perform full Bayesian inference over the HMM parameters.
+> **Methodology note:** The Gaussian HMM uses EM/Baum-Welch maximum-likelihood estimation. The hidden states are inferred probabilistically, but the current specification does not perform full Bayesian inference over the model parameters.
 
 ## Results for Methodology No. 2: Continuous Emissions
 
