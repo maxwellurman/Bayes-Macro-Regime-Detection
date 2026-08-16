@@ -205,9 +205,9 @@ Pulling the emission category with the maximum probability for each given state,
 
 ### Continuous Emissions — Feature Engineering
 
-#### Short- and Long-Horizon Signals
+#### Feature and Momentum Summary
 
-Additional signals are constructed to capture both **recent economic momentum** and **longer-term economic conditions**:
+The continuous model uses a combination of **short-term momentum, long-term trends, and economically meaningful level variables** to represent different aspects of macroeconomic conditions:
 
 - **Growth variables** — CPI, Industrial Production, Housing Starts, and Real PCE use **1-month percent change (MoM)** for short-term momentum and **12-month percent change (YoY)** for long-term momentum.
 
@@ -217,10 +217,28 @@ Additional signals are constructed to capture both **recent economic momentum** 
 
 > **Housing Starts:** Raw 12-month YoY growth is retained because the YoY horizon already reduces short-term noise, while the full-covariance Gaussian HMM can absorb remaining variability within each state's covariance structure.
 
-**Model-specific choices:** The continuous model retains Federal Funds Rate momentum and uses the monthly-average yield-curve spread.
+**Model-specific choice:** The continuous specification retains **Federal Funds Rate momentum**, while the discrete model excludes it.
 
-> **Preprocessing note:** The final continuous features are robustly scaled using the median and IQR before Gaussian HMM estimation; details are provided in the methodology section.
 
+
+### Final Continuous-HMM Feature Set
+
+Based on the diagnostic screening above, **8 economically distinct features** are selected, balancing short- and long-term signals while limiting unnecessary redundancy.
+
+| Feature | Economic Signal | Selection Rationale |
+|---|---|---|
+| `CPI_ST_Momentum` | Inflation — recent | Captures short-term inflation changes and turning points; only moderately correlated with CPI LT (**r = 0.41**). |
+| `CPI_LT_Momentum` | Inflation — trend | Captures the longer-term YoY inflation trend. |
+| `Industrial_Production_LT_Momentum` | Real activity | Captures the longer-term business-cycle growth trend. |
+| `Housing_Starts_LT_Momentum` | Housing activity | Captures rate-sensitive housing-cycle conditions distinct from Industrial Production. |
+| `Unemployment_Rate_ST_Momentum` | Labor market | Captures short-term labor-market changes and economic turning points. |
+| `Federal_Funds_Rate_LT_Momentum` | Monetary policy | Captures the broader hiking/cutting cycle; LT is retained over ST for parsimony (**ST/LT r = 0.59**). |
+| `Yield_Curve_Spread_MonthAvg` | Yield curve | Captures the level of the yield curve as a forward-looking economic signal. |
+| `Log_VIX_MonthAvg` | Market stress | Captures financial-market stress while the log transformation reduces VIX skew. |
+
+**Final analytical input:** 8 features covering **inflation, real activity, housing, labor conditions, monetary policy, the yield curve, and market stress**.
+
+> **Note:** Feature selection reduces unnecessary redundancy rather than requiring independent inputs. The full-covariance Gaussian HMM directly models how the selected macroeconomic variables move together within each hidden regime.
 
 ### Methodology Walkthrough
 
