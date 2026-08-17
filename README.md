@@ -417,7 +417,7 @@ The ordering is economically intuitive: GDP growth is strongest in the expansion
 
 State 1 is a special case. It contains only **two quarterly GDP observations immediately following the 2020 collapse**, when YoY GDP growth was still negative, despite the economy beginning to rebound.
 
-![5-State HMM Regimes vs. Real GDP and NBER Recessions](fig_gdp_validation.png)
+<img width="2381" height="884" alt="fig_gdp_validation" src="https://github.com/user-attachments/assets/527af576-3dc2-4357-8517-1769c71dbd89" />
 
 The timeline reinforces these results: expansion states dominate sustained growth periods, while **Slowdown / Policy Easing** and **Elevated Stress / Contraction** appear around major downturns such as the **2008–09 financial crisis and the 2020 contraction**.
 
