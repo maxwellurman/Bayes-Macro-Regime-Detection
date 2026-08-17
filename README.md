@@ -432,7 +432,7 @@ Overall, the two approaches [_______showed similar / different broad regime patt
 ## Repository Structure
 What are the important files?  
 1. Create_Dataset_v2.ipynb - cleans data and creates dataset for analysis
-2. Continuous_HMM_Regime_Model_v3.ipynb - runs continuous-emission HMM
+2. Continuous_HMM_Regime_Model.ipynb - runs continuous-emission HMM
 3. Discrete Emissions.ipynb - runs discrete-emission HMM
 4. master_monthly_dataset.csv - data source
 5. gdp_quarterly_growth.csv - data source
