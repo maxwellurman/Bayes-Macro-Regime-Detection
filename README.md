@@ -36,6 +36,7 @@ We are using data macroeconomic data available from the Federal Reserve Bank of 
 3. Log transform of VIX. VIX is strongly right-skewed.
 4. **Discretize** the variables into 3 quantiles for the discrete emission analysis.
 
+## Methodology No. 1: Discrete Emissions
 ### Final Analytical Dataset
 Note: We include both the annual change and monthly change series for Industrial Production, Housing Starts, and Unemployment Rate to account for short term and long term momentum.  For example, coming out of a recession, year-over-year change in Housing Starts might be flat or negative, but month-over-month change might be positive.
 |   Variable |   Frequency |   Description |
@@ -51,11 +52,9 @@ Note: We include both the annual change and monthly change series for Industrial
 |                  Real_PCE_YoY |          Monthly | Percent Change YoY |
 |                  Log_VIX_MonthAvg |          Monthly | Log of Monthly Average of Daily VIX |
 
-
 ### Example Time Series Plots:
 <img width="9538" height="7080" alt="time_series_plots" src="https://github.com/user-attachments/assets/832e7c75-1e63-4cee-9c63-6e1a7e4eac4b" />
 
-## Methodology No. 1: Discrete Emissions
 ### Hidden Markov Model Set Up
 Hidden Markov Model with K hidden states representing macroeconomic regimes:
 
