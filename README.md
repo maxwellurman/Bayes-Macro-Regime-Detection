@@ -389,6 +389,39 @@ State-specific distributions show the typical macroeconomic profile of each regi
 
 **State-selection implication:** The 5-state specification produces economically distinct and historically recognizable regimes rather than simply splitting the data into additional statistical clusters. In particular, it separates different expansion environments and distinguishes **acute stress from the unusual post-crisis rebound**.
 
+### 4. External Validation Against Economic Conditions
+
+The inferred regimes are compared with **NBER recession periods and real GDP**, neither of which is used to fit the HMM. This provides an external check of whether the inferred states correspond to recognizable economic conditions.
+
+#### NBER Recession Comparison
+
+- **State 3 — Slowdown / Policy Easing** captures **64.5% of all NBER recession months**, suggesting that recessions often occur within a broader slowdown and policy-easing environment.
+- **State 4 — Elevated Stress / Contraction** has the highest recession concentration: **28.2% of its own months are recession months**, consistent with a more acute stress regime.
+- **States 0, 1, and 2** contain no NBER recession months.
+
+Together, States 3 and 4 separate a **broader slowdown environment** from periods of **more severe economic stress**.
+
+#### Real GDP Comparison
+
+Real GDP provides a second external check. Average YoY GDP growth generally declines as the inferred regimes move from expansion toward economic stress:
+
+| Economic Regime | Avg. Real GDP YoY Growth | Quarters |
+|---|---:|---:|
+| **State 0 — Hiking-Cycle Expansion** | **3.86%** | 49 |
+| **State 2 — Steady / Housing-Led Expansion** | **2.49%** | 38 |
+| **State 3 — Slowdown / Policy Easing** | **1.90%** | 38 |
+| **State 4 — Elevated Stress / Contraction** | **0.40%** | 13 |
+| **State 1 — Post-Crisis Snapback** | **−4.38%** | 2 |
+
+The ordering is economically intuitive: GDP growth is strongest in the expansion regimes, weaker in the slowdown regime, and lowest among the broader stress periods.
+
+State 1 is a special case. It contains only **two quarterly GDP observations immediately following the 2020 collapse**, when YoY GDP growth was still negative, despite the economy beginning to rebound.
+
+![5-State HMM Regimes vs. Real GDP and NBER Recessions](fig_gdp_validation.png)
+
+The timeline reinforces these results: expansion states dominate sustained growth periods, while **Slowdown / Policy Easing** and **Elevated Stress / Contraction** appear around major downturns such as the **2008–09 financial crisis and the 2020 contraction**.
+
+**Takeaway:** Although NBER recessions and real GDP are not model inputs, both show meaningful alignment with the inferred regimes. This provides external support that the **5-state HMM captures economically interpretable regime structure rather than only improving statistical fit**.
 
 ## Comparison of Approaches
 Both models were able to identify persistent and economically interpretable macroeconomic regimes. Rather than comparing the numerical state labels directly, we compared the timing of regime transitions and how the inferred states aligned with real GDP and known recession periods.
